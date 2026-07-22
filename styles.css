@@ -1,0 +1,103 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #101217;
+  color: #f5f3ee;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { min-width: 320px; min-height: 100%; }
+
+body {
+  min-height: 100svh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+  background:
+    radial-gradient(circle at 18% 8%, rgba(242, 166, 90, .09), transparent 28rem),
+    radial-gradient(circle at 85% 92%, rgba(93, 166, 149, .1), transparent 30rem),
+    #101217;
+  -webkit-font-smoothing: antialiased;
+}
+
+.launcher {
+  width: min(100%, 980px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.app-card {
+  position: relative;
+  min-height: clamp(290px, 42vw, 410px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 30px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, .3);
+  isolation: isolate;
+  transition: translate 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.app-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: .85;
+  transition: opacity 180ms ease, scale 300ms ease;
+}
+
+.app-card:hover { translate: 0 -5px; border-color: rgba(255, 255, 255, .22); box-shadow: 0 32px 90px rgba(0, 0, 0, .42); }
+.app-card:hover::before { opacity: 1; scale: 1.03; }
+.app-card:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
+
+.mixbar { background: #18171a; }
+.mixbar::before { background: radial-gradient(circle at 100% 0, rgba(242, 166, 90, .26), transparent 52%), linear-gradient(145deg, #201b19, #111318 72%); }
+.mixbar .app-icon, .mixbar .open-label { color: #f2a65a; }
+
+.angelkompass { background: #14201e; }
+.angelkompass::before { background: radial-gradient(circle at 100% 0, rgba(122, 191, 166, .25), transparent 52%), linear-gradient(145deg, #19302b, #101817 72%); }
+.angelkompass .app-icon, .angelkompass .open-label { color: #8ed0b7; }
+
+.app-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .045);
+}
+
+.app-icon svg { width: 42px; height: 42px; }
+.app-copy { display: grid; gap: .8rem; margin-top: auto; }
+
+.app-copy strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 4vw, 2.4rem);
+  letter-spacing: .08em;
+}
+
+.app-copy span { color: rgba(245, 243, 238, .7); font-size: clamp(.95rem, 2vw, 1.08rem); }
+.open-label { display: flex; align-items: center; justify-content: space-between; font-weight: 800; letter-spacing: .04em; }
+.open-label span { font-size: 1.5rem; transition: translate 180ms ease; }
+.app-card:hover .open-label span { translate: .35rem 0; }
+
+@media (max-width: 680px) {
+  body { place-items: start center; }
+  .launcher { grid-template-columns: 1fr; }
+  .app-card { min-height: 260px; border-radius: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
